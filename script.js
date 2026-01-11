@@ -1,4 +1,4 @@
-// ================== НАСТРОЙКИ ДОСТУПА ==================
+// ================== ДОСТУП ==================
 const CORRECT_LOGIN = "chosenone";
 const CORRECT_PASS  = "kabachok2026";
 
@@ -6,56 +6,70 @@ const CORRECT_PASS  = "kabachok2026";
 const MAX_ROUNDS = 100;
 let round = Number(localStorage.getItem("round") || 0);
 
-// 🥒 картинка обычного кабачка
+// обычный кабачок (SVG, стабильно)
 const KABACHOK_IMG =
-  "https://twemoji.maxcdn.com/v/latest/72x72/1f952.png";
+  "https://cdn.jsdelivr.net/npm/twemoji@14.0.2/assets/svg/1f952.svg";
 
 // ================== 50 ПРЕДМЕТОВ ==================
+// формат: [текст, код_emoji]
 const items = [
-  { text: "банку кабачковой икры", img: "https://twemoji.maxcdn.com/v/latest/72x72/1fad9.png" },
-  { text: "тапок Аллы", img: "https://twemoji.maxcdn.com/v/latest/72x72/1f97e.png" },
-  { text: "тухлый кабачок", img: "https://twemoji.maxcdn.com/v/latest/72x72/1f9eb.png" },
-  { text: "повестку в армию", img: "https://twemoji.maxcdn.com/v/latest/72x72/1f4dc.png" },
-  { text: "один носок", img: "https://twemoji.maxcdn.com/v/latest/72x72/1f9e6.png" },
-  { text: "чек без возврата", img: "https://twemoji.maxcdn.com/v/latest/72x72/1f9fe.png" },
-  { text: "ключ неизвестно от чего", img: "https://twemoji.maxcdn.com/v/latest/72x72/1f511.png" },
-  { text: "пустую коробку", img: "https://twemoji.maxcdn.com/v/latest/72x72/1f4e6.png" },
-  { text: "старый телефон", img: "https://twemoji.maxcdn.com/v/latest/72x72/1f4f1.png" },
-  { text: "подозрительную флешку", img: "https://twemoji.maxcdn.com/v/latest/72x72/1f4be.png" },
+  ["банку кабачковой икры","1fad9"],
+  ["тапок Аллы","1f97e"],
+  ["тухлый кабачок","1f9eb"],
+  ["повестку в армию","1f4dc"],
+  ["один носок","1f9e6"],
+  ["чек без возврата","1f9fe"],
+  ["ключ неизвестно от чего","1f511"],
+  ["пустую коробку","1f4e6"],
+  ["старый телефон","1f4f1"],
+  ["подозрительную флешку","1f4be"],
 
-  { text: "порванный пакет", img: "https://twemoji.maxcdn.com/v/latest/72x72/1f9f3.png" },
-  { text: "сломанный зонт", img: "https://twemoji.maxcdn.com/v/latest/72x72/2602.png" },
-  { text: "карандаш без грифеля", img: "https://twemoji.maxcdn.com/v/latest/72x72/270f.png" },
-  { text: "пустую кружку", img: "https://twemoji.maxcdn.com/v/latest/72x72/2615.png" },
-  { text: "грязную тарелку", img: "https://twemoji.maxcdn.com/v/latest/72x72/1f37d.png" },
-  { text: "пульт без батареек", img: "https://twemoji.maxcdn.com/v/latest/72x72/1f4fa.png" },
-  { text: "чужую зарядку", img: "https://twemoji.maxcdn.com/v/latest/72x72/1f50c.png" },
-  { text: "обрывок инструкции", img: "https://twemoji.maxcdn.com/v/latest/72x72/1f4c4.png" },
-  { text: "старый будильник", img: "https://twemoji.maxcdn.com/v/latest/72x72/23f0.png" },
-  { text: "одну перчатку", img: "https://twemoji.maxcdn.com/v/latest/72x72/1f9e4.png" },
+  ["порванный пакет","1f9f3"],
+  ["сломанный зонт","2602"],
+  ["карандаш без грифеля","270f"],
+  ["пустую кружку","2615"],
+  ["грязную тарелку","1f37d"],
+  ["пульт без батареек","1f4fa"],
+  ["чужую зарядку","1f50c"],
+  ["обрывок инструкции","1f4c4"],
+  ["старый будильник","23f0"],
+  ["одну перчатку","1f9e4"],
 
-  { text: "пакет с пакетами", img: "https://twemoji.maxcdn.com/v/latest/72x72/1f45c.png" },
-  { text: "сломанные наушники", img: "https://twemoji.maxcdn.com/v/latest/72x72/1f3a7.png" },
-  { text: "пластиковую вилку", img: "https://twemoji.maxcdn.com/v/latest/72x72/1f374.png" },
-  { text: "мятую салфетку", img: "https://twemoji.maxcdn.com/v/latest/72x72/1f9fb.png" },
-  { text: "чек трёхлетней давности", img: "https://twemoji.maxcdn.com/v/latest/72x72/1f9fe.png" },
-  { text: "бесполезный купон", img: "https://twemoji.maxcdn.com/v/latest/72x72/1f3f7.png" },
-  { text: "сломанный USB-кабель", img: "https://twemoji.maxcdn.com/v/latest/72x72/1f9ef.png" },
-  { text: "старый пропуск", img: "https://twemoji.maxcdn.com/v/latest/72x72/1f4db.png" },
-  { text: "пыльный брелок", img: "https://twemoji.maxcdn.com/v/latest/72x72/1f511.png" },
-  { text: "пустой кошелёк", img: "https://twemoji.maxcdn.com/v/latest/72x72/1f45b.png" },
+  ["пакет с пакетами","1f45c"],
+  ["сломанные наушники","1f3a7"],
+  ["пластиковую вилку","1f374"],
+  ["мятую салфетку","1f9fb"],
+  ["чек трёхлетней давности","1f9fe"],
+  ["бесполезный купон","1f3f7"],
+  ["сломанный USB-кабель","1f9ef"],
+  ["старый пропуск","1f4db"],
+  ["пыльный брелок","1f511"],
+  ["пустой кошелёк","1f45b"],
 
-  { text: "ненужную бумажку", img: "https://twemoji.maxcdn.com/v/latest/72x72/1f4c3.png" },
-  { text: "странный болт", img: "https://twemoji.maxcdn.com/v/latest/72x72/1f529.png" },
-  { text: "крышку без банки", img: "https://twemoji.maxcdn.com/v/latest/72x72/1fad9.png" },
-  { text: "пластиковую карту", img: "https://twemoji.maxcdn.com/v/latest/72x72/1f4b3.png" },
-  { text: "старый CD-диск", img: "https://twemoji.maxcdn.com/v/latest/72x72/1f4bf.png" },
-  { text: "непонятную кнопку", img: "https://twemoji.maxcdn.com/v/latest/72x72/1f518.png" },
-  { text: "потерянную мелочь", img: "https://twemoji.maxcdn.com/v/latest/72x72/1fa99.png" },
-  { text: "чужой билет", img: "https://twemoji.maxcdn.com/v/latest/72x72/1f3ab.png" },
-  { text: "лист без текста", img: "https://twemoji.maxcdn.com/v/latest/72x72/1f4c4.png" },
-  { text: "пакетик с воздухом", img: "https://twemoji.maxcdn.com/v/latest/72x72/1f4e6.png" }
+  ["ненужную бумажку","1f4c3"],
+  ["странный болт","1f529"],
+  ["крышку без банки","1fad9"],
+  ["пластиковую карту","1f4b3"],
+  ["старый CD-диск","1f4bf"],
+  ["непонятную кнопку","1f518"],
+  ["потерянную мелочь","1fa99"],
+  ["чужой билет","1f3ab"],
+  ["лист без текста","1f4c4"],
+  ["пакетик с воздухом","1f4e6"],
+
+  ["сломанный замок","1f512"],
+  ["чужую ручку","1f58a"],
+  ["пустую флешку","1f4be"],
+  ["старый календарь","1f4c5"],
+  ["ржавый гвоздь","1f528"]
 ];
+
+// ================== ЗАЩИТА ОТ ПОКАЗА ДО ЛОГИНА ==================
+window.onload = () => {
+  if (typeof modal !== "undefined") {
+    modal.classList.add("hidden");
+  }
+};
 
 // ================== ЛОГИКА ==================
 
@@ -91,6 +105,7 @@ function pick() {
   localStorage.setItem("round", round);
   updateUI();
 
+  // финал после 100
   if (round >= MAX_ROUNDS) {
     showModal(
       "❌ За 100 раундов ты не нашёл золотой кабачок.\nАлла не примет тебя в друзья.",
@@ -101,8 +116,8 @@ function pick() {
 
   const item = items[Math.floor(Math.random() * items.length)];
   showModal(
-    "Ты не нашёл золотой кабачок,\nно ты нашёл " + item.text + ".",
-    item.img
+    "Ты не нашёл золотой кабачок,\nно ты нашёл " + item[0] + ".",
+    `https://cdn.jsdelivr.net/npm/twemoji@14.0.2/assets/svg/${item[1]}.svg`
   );
 }
 
